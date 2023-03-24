@@ -3,7 +3,7 @@ organization := "eu.joaocosta"
 
 scalaVersion := "3.2.2"
 
-enablePlugins(ScalaNativePlugin)
+enablePlugins(ScalaNativePlugin, VcpkgNativePlugin)
 libraryDependencies ++= List(
   "eu.joaocosta" %%% "minart"        % "0.5.0-RC1",
   "io.circe"     %%% "circe-core"    % "0.14.3",
@@ -12,9 +12,12 @@ libraryDependencies ++= List(
 )
 
 nativeLinkStubs := true
-nativeMode      := "release"
-nativeLTO       := "thin"
+nativeMode      := "release-fast"
+/* nativeLTO       := "thin" */
 nativeGC        := "commix"
 nativeConfig ~= {
   _.withEmbedResources(true)
 }
+
+vcpkgDependencies := VcpkgDependencies("sdl2", "curl")
+vcpkgNativeConfig ~=(_.addRenamedLibrary("curl", "libcurl"))

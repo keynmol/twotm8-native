@@ -87,7 +87,7 @@ object TwotM8Native {
     (!ctx).text_height = CFuncPtr1.fromScalaFunction { _ => Constants.fontHeight }
 
     MinartBackend.run(ctx) {
-      // frameCounter() // Uncomment to show the FPS
+      frameCounter() // Uncomment to show the FPS
       appDefinition(ctx)
     }
   }
